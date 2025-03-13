@@ -55,6 +55,8 @@ export default class IntelligenceRagPlugin extends Plugin {
 	settings: IntelligenceRagSettings;
 	/** Service for connecting to and interacting with Ollama */
 	ollamaService: OllamaService;
+	/** Status bar item for displaying connection status */
+	statusBarItem: HTMLElement;
 
 	/**
 	 * Lifecycle method called when the plugin is loaded
@@ -88,8 +90,8 @@ export default class IntelligenceRagPlugin extends Plugin {
 		});
 
 		// Add status bar item to show connection status
-		const statusBarItem = this.addStatusBarItem();
-		statusBarItem.setText('RAG: Ready');
+		this.statusBarItem = this.addStatusBarItem();
+		this.statusBarItem.setText('RAG: Ready');
 
 		console.log('Intelligence RAG plugin loaded');
 	}
@@ -101,19 +103,17 @@ export default class IntelligenceRagPlugin extends Plugin {
 	async initializeOllamaConnection() {
 		try {
 			const isConnected = await this.ollamaService.checkConnection();
-			const statusBarItem = this.statusBar?.lastChild as HTMLElement;
 			
 			if (isConnected) {
 				console.log('Successfully connected to Ollama');
-				statusBarItem?.setText('RAG: Connected');
+				this.statusBarItem?.setText('RAG: Connected');
 			} else {
 				console.error('Failed to connect to Ollama');
-				statusBarItem?.setText('RAG: Connection Error');
+				this.statusBarItem?.setText('RAG: Connection Error');
 			}
 		} catch (error) {
 			console.error('Error connecting to Ollama:', error);
-			const statusBarItem = this.statusBar?.lastChild as HTMLElement;
-			statusBarItem?.setText('RAG: Connection Error');
+			this.statusBarItem?.setText('RAG: Connection Error');
 		}
 	}
 
@@ -268,4 +268,4 @@ class IntelligenceRagSettingTab extends PluginSettingTab {
 					}
 				}));
 	}
-} 
+}
