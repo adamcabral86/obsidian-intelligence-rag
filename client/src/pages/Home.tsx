@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Paper, Grid, Card, CardContent, CardActionArea, useTheme } from '@mui/material';
 import { Description, Search, People, Settings } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { useThemeColors } from '../theme';
 
 /**
  * Feature card props
@@ -19,6 +20,7 @@ interface FeatureCardProps {
 const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon, path }) => {
   const navigate = useNavigate();
   const theme = useTheme();
+  const themeColors = useThemeColors();
 
   return (
     <Card 
@@ -30,7 +32,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon, pat
           transform: 'translateY(-5px)',
           boxShadow: theme.shadows[6],
           '& .card-icon': {
-            backgroundColor: 'rgba(249,162,27,0.8)',
+            backgroundColor: themeColors.colors.primaryLight,
           }
         },
         borderRadius: 2,
@@ -49,8 +51,8 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon, pat
                 display: 'flex', 
                 p: 1, 
                 borderRadius: '50%', 
-                bgcolor: 'rgba(249,162,27,1)',
-                color: '#fff',
+                bgcolor: themeColors.colors.primary,
+                color: themeColors.colors.surfaceLight,
                 transition: 'background-color 0.2s',
               }}
             >
@@ -74,6 +76,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon, pat
  */
 const Home: React.FC = () => {
   const theme = useTheme();
+  const themeColors = useThemeColors();
 
   return (
     <Box>
@@ -83,20 +86,10 @@ const Home: React.FC = () => {
           p: 4, 
           mb: 4, 
           borderRadius: 2,
-          background: 'linear-gradient(45deg, #54595F 30%, #6c757d 90%)',
-          color: 'white',
+          backgroundColor: themeColors.isDarkMode ? themeColors.colors.surfaceDark : themeColors.colors.secondary,
+          color: themeColors.colors.textPrimaryDark,
           position: 'relative',
           overflow: 'hidden',
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            width: '30%',
-            height: '100%',
-            background: 'linear-gradient(45deg, transparent, rgba(249,162,27,0.3))',
-            zIndex: 1,
-          }
         }}
       >
         <Box sx={{ position: 'relative', zIndex: 2 }}>
@@ -149,9 +142,9 @@ const Home: React.FC = () => {
         mt: 4, 
         borderRadius: 2,
         border: '1px solid',
-        borderColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)',
+        borderColor: themeColors.isDarkMode ? themeColors.colors.borderDark : themeColors.colors.borderLight,
       }}>
-        <Typography variant="h5" gutterBottom sx={{ color: 'rgba(249,162,27,1)' }}>
+        <Typography variant="h5" gutterBottom sx={{ color: themeColors.colors.primary }}>
           Getting Started
         </Typography>
         <Typography variant="body1" paragraph>

@@ -26,6 +26,7 @@ import {
   Event as EventIcon,
   Search as SearchIcon,
 } from '@mui/icons-material';
+import { useThemeColors } from '../theme';
 
 /**
  * Entity type enum
@@ -221,6 +222,7 @@ const getConfidenceColor = (confidence: 'high' | 'medium' | 'low'): 'success' | 
  */
 const Entities: React.FC = () => {
   const theme = useTheme();
+  const themeColors = useThemeColors();
   const [activeTab, setActiveTab] = useState<EntityType | 'all'>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedEntity, setSelectedEntity] = useState<Entity | null>(null);
@@ -242,9 +244,9 @@ const Entities: React.FC = () => {
   const getEntityBgColor = (type: EntityType) => {
     switch (type) {
       case EntityType.PERSON:
-        return 'rgba(249,162,27,1)';
+        return themeColors.colors.primary;
       case EntityType.ORGANIZATION:
-        return '#54595F';
+        return themeColors.colors.secondary;
       case EntityType.LOCATION:
         return theme.palette.success.main;
       case EntityType.EQUIPMENT:
@@ -286,11 +288,11 @@ const Entities: React.FC = () => {
               fontWeight: 500,
             },
             '& .MuiTabs-indicator': {
-              backgroundColor: 'rgba(249,162,27,1)',
+              backgroundColor: themeColors.colors.primary,
               height: 3,
             },
             '& .Mui-selected': {
-              color: 'rgba(249,162,27,1) !important',
+              color: `${themeColors.colors.primary} !important`,
             }
           }}
         >
@@ -344,7 +346,7 @@ const Entities: React.FC = () => {
             mb: 3,
             '& .MuiOutlinedInput-root': {
               '&.Mui-focused fieldset': {
-                borderColor: 'rgba(249,162,27,1)',
+                borderColor: themeColors.colors.primary,
               },
             },
           }}
@@ -369,9 +371,9 @@ const Entities: React.FC = () => {
                       sx={{ 
                         cursor: 'pointer',
                         bgcolor: selectedEntity?.id === entity.id ? 
-                          'rgba(249,162,27,0.1)' : 'inherit',
+                          `${themeColors.colors.primary}10` : 'inherit', // 10% opacity
                         '&:hover': {
-                          bgcolor: 'rgba(249,162,27,0.05)',
+                          bgcolor: `${themeColors.colors.primary}05`, // 5% opacity
                         }
                       }}
                     >
@@ -439,7 +441,7 @@ const Entities: React.FC = () => {
                         p: 1,
                         borderRadius: '50%',
                         bgcolor: getEntityBgColor(selectedEntity.type),
-                        color: '#fff',
+                        color: themeColors.colors.surfaceLight,
                       }}
                     >
                       {getEntityIcon(selectedEntity.type)}

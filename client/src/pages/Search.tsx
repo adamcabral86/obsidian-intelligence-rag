@@ -21,6 +21,7 @@ import {
   ExpandMore as ExpandMoreIcon,
   Description as DescriptionIcon,
 } from '@mui/icons-material';
+import { useThemeColors } from '../theme';
 
 /**
  * Mock search result interface
@@ -43,6 +44,7 @@ interface SearchResult {
  */
 const Search: React.FC = () => {
   const theme = useTheme();
+  const themeColors = useThemeColors();
   const [query, setQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<SearchResult[] | null>(null);
@@ -199,10 +201,9 @@ These activities suggest coordinated preparations for diplomatic engagements acr
                         px: 2,
                         borderRadius: 1,
                         '&:hover': {
-                          bgcolor:
-                            theme.palette.mode === 'dark'
-                              ? 'rgba(255,255,255,0.05)'
-                              : 'rgba(0,0,0,0.02)',
+                          bgcolor: themeColors.isDarkMode
+                            ? `${themeColors.colors.surfaceLight}05` // 5% opacity
+                            : `${themeColors.colors.secondary}02`,   // 2% opacity
                         },
                       }}
                     >
@@ -268,8 +269,9 @@ These activities suggest coordinated preparations for diplomatic engagements acr
           sx={{
             p: 4,
             textAlign: 'center',
-            bgcolor:
-              theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.02)',
+            bgcolor: themeColors.isDarkMode
+              ? themeColors.colors.surfaceDark
+              : `${themeColors.colors.secondary}02`, // 2% opacity
           }}
         >
           <SearchIcon sx={{ fontSize: 60, color: 'text.secondary', mb: 2, opacity: 0.5 }} />

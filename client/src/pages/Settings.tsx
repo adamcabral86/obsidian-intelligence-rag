@@ -26,6 +26,7 @@ import {
   DialogActions,
   InputAdornment,
   Tooltip,
+  useTheme,
 } from '@mui/material';
 import {
   Brightness4 as DarkModeIcon,
@@ -34,6 +35,7 @@ import {
   Save as SaveIcon,
   Info as InfoIcon,
 } from '@mui/icons-material';
+import { useThemeColors } from '../theme';
 
 interface SettingsProps {
   darkMode: boolean;
@@ -75,6 +77,9 @@ const mockApiKeys: ApiKey[] = [
  * Settings page component
  */
 const Settings: React.FC<SettingsProps> = ({ darkMode, toggleDarkMode }) => {
+  const theme = useTheme();
+  const themeColors = useThemeColors();
+  
   // State for API settings
   const [apiEndpoint, setApiEndpoint] = useState('https://api.openai.com/v1');
   const [apiKeys, setApiKeys] = useState<ApiKey[]>(mockApiKeys);
@@ -188,13 +193,13 @@ const Settings: React.FC<SettingsProps> = ({ darkMode, toggleDarkMode }) => {
                       icon={<DarkModeIcon />}
                       sx={{
                         '& .MuiSwitch-switchBase.Mui-checked': {
-                          color: 'rgba(249,162,27,1)',
+                          color: themeColors.colors.primary,
                           '&:hover': {
-                            backgroundColor: 'rgba(249,162,27,0.08)',
+                            backgroundColor: `${themeColors.colors.primary}08`, // 8% opacity
                           },
                         },
                         '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                          backgroundColor: 'rgba(249,162,27,0.5)',
+                          backgroundColor: `${themeColors.colors.primary}50`, // 50% opacity
                         },
                       }}
                     />
@@ -221,11 +226,11 @@ const Settings: React.FC<SettingsProps> = ({ darkMode, toggleDarkMode }) => {
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       '&.Mui-focused fieldset': {
-                        borderColor: 'rgba(249,162,27,1)',
+                        borderColor: themeColors.colors.primary,
                       },
                     },
                     '& .MuiInputLabel-root.Mui-focused': {
-                      color: 'rgba(249,162,27,1)',
+                      color: themeColors.colors.primary,
                     },
                   }}
                 />
@@ -292,9 +297,9 @@ const Settings: React.FC<SettingsProps> = ({ darkMode, toggleDarkMode }) => {
                         onClick={handleAddApiKey}
                         disabled={!newKeyName || !newKeyValue}
                         sx={{
-                          backgroundColor: 'rgba(249,162,27,1)',
+                          backgroundColor: themeColors.colors.primary,
                           '&:hover': {
-                            backgroundColor: 'rgba(249,162,27,0.8)',
+                            backgroundColor: themeColors.colors.primaryLight,
                           },
                         }}
                       >
@@ -308,11 +313,10 @@ const Settings: React.FC<SettingsProps> = ({ darkMode, toggleDarkMode }) => {
                           setNewKeyValue('');
                         }}
                         sx={{
-                          borderColor: '#54595F',
-                          color: '#54595F',
+                          borderColor: themeColors.colors.secondary,
+                          color: themeColors.colors.secondary,
                           '&:hover': {
-                            borderColor: 'rgba(84,89,95,0.8)',
-                            backgroundColor: 'rgba(84,89,95,0.05)',
+                            borderColor: themeColors.colors.secondaryLight,
                           },
                         }}
                       >
@@ -358,11 +362,11 @@ const Settings: React.FC<SettingsProps> = ({ darkMode, toggleDarkMode }) => {
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       '&.Mui-focused fieldset': {
-                        borderColor: 'rgba(249,162,27,1)',
+                        borderColor: themeColors.colors.primary,
                       },
                     },
                     '& .MuiInputLabel-root.Mui-focused': {
-                      color: 'rgba(249,162,27,1)',
+                      color: themeColors.colors.primary,
                     },
                   }}
                 />
@@ -479,9 +483,9 @@ const Settings: React.FC<SettingsProps> = ({ darkMode, toggleDarkMode }) => {
             onClick={handleSaveSettings}
             size="large"
             sx={{
-              backgroundColor: 'rgba(249,162,27,1)',
+              backgroundColor: themeColors.colors.primary,
               '&:hover': {
-                backgroundColor: 'rgba(249,162,27,0.8)',
+                backgroundColor: themeColors.colors.primaryLight,
               },
               fontWeight: 'bold',
               px: 4,

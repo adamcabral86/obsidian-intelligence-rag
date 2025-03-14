@@ -28,6 +28,7 @@ import {
   People as PeopleIcon,
   Settings as SettingsIcon,
 } from '@mui/icons-material';
+import { useThemeColors } from '../theme';
 
 // Drawer width
 const drawerWidth = 240;
@@ -55,6 +56,7 @@ interface LayoutProps {
  */
 const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) => {
   const theme = useTheme();
+  const themeColors = useThemeColors();
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -86,7 +88,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
           sx={{ 
             flexGrow: 1, 
             ml: 2,
-            color: 'rgba(249,162,27,1)',
+            color: themeColors.colors.primary,
             fontWeight: 'bold'
           }}
         >
@@ -107,25 +109,31 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
               onClick={() => handleNavigation(item.path)}
               sx={{
                 '&.Mui-selected': {
-                  backgroundColor: darkMode ? 'rgba(249,162,27,0.15)' : 'rgba(249,162,27,0.1)',
+                  backgroundColor: darkMode 
+                    ? `${themeColors.colors.primaryDark}15` // 15% opacity
+                    : `${themeColors.colors.primary}10`,    // 10% opacity
                   '&:hover': {
-                    backgroundColor: darkMode ? 'rgba(249,162,27,0.25)' : 'rgba(249,162,27,0.2)',
+                    backgroundColor: darkMode 
+                      ? `${themeColors.colors.primaryDark}25` // 25% opacity
+                      : `${themeColors.colors.primary}20`,    // 20% opacity
                   },
                 },
                 '&:hover': {
-                  backgroundColor: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)',
+                  backgroundColor: darkMode 
+                    ? `${themeColors.colors.surfaceLight}05` // 5% opacity
+                    : `${themeColors.colors.secondary}04`,   // 4% opacity
                 },
               }}
             >
               <ListItemIcon sx={{ 
-                color: location.pathname === item.path ? 'rgba(249,162,27,1)' : undefined 
+                color: location.pathname === item.path ? themeColors.colors.primary : undefined 
               }}>
                 {item.icon}
               </ListItemIcon>
               <ListItemText 
                 primary={item.text} 
                 sx={{ 
-                  color: location.pathname === item.path ? 'rgba(249,162,27,1)' : undefined 
+                  color: location.pathname === item.path ? themeColors.colors.primary : undefined 
                 }}
               />
             </ListItemButton>
@@ -143,8 +151,8 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
         sx={{
           width: { md: `calc(100% - ${drawerWidth}px)` },
           ml: { md: `${drawerWidth}px` },
-          backgroundColor: darkMode ? '#54595F' : undefined,
-          boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
+          backgroundColor: darkMode ? themeColors.colors.backgroundDark : undefined,
+          boxShadow: `0 2px 10px ${themeColors.colors.borderLight}`,
         }}
       >
         <Toolbar>
@@ -169,7 +177,10 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
             {navItems.find((item) => item.path === location.pathname)?.text || 'Intelligence RAG'}
           </Typography>
           <IconButton color="inherit" onClick={toggleDarkMode}>
-            {darkMode ? <Brightness7Icon sx={{ color: 'rgba(249,162,27,1)' }} /> : <Brightness4Icon />}
+            {darkMode ? 
+              <Brightness7Icon sx={{ color: themeColors.colors.primary }} /> : 
+              <Brightness4Icon />
+            }
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -191,7 +202,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
             '& .MuiDrawer-paper': { 
               boxSizing: 'border-box', 
               width: drawerWidth,
-              backgroundColor: darkMode ? '#1e1e1e' : undefined,
+              backgroundColor: darkMode ? themeColors.colors.surfaceDark : undefined,
             },
           }}
         >
@@ -205,8 +216,8 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
             '& .MuiDrawer-paper': { 
               boxSizing: 'border-box', 
               width: drawerWidth,
-              backgroundColor: darkMode ? '#1e1e1e' : undefined,
-              borderRight: darkMode ? '1px solid rgba(255, 255, 255, 0.12)' : undefined,
+              backgroundColor: darkMode ? themeColors.colors.surfaceDark : undefined,
+              borderRight: darkMode ? `1px solid ${themeColors.colors.borderDark}` : undefined,
             },
           }}
           open
@@ -221,7 +232,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
           p: 3,
           width: { md: `calc(100% - ${drawerWidth}px)` },
           minHeight: '100vh',
-          backgroundColor: darkMode ? '#121212' : undefined,
+          backgroundColor: darkMode ? themeColors.colors.backgroundDark : undefined,
         }}
       >
         <Toolbar /> {/* Spacer for fixed AppBar */}

@@ -4,7 +4,8 @@ body {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
+  /* Using CSS variables that will be set by the theme provider */
+  background-color: var(--mui-palette-background-default);
 }
 
 code {

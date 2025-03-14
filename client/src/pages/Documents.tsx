@@ -25,6 +25,7 @@ import {
   Visibility as VisibilityIcon,
   CloudUpload as CloudUploadIcon,
 } from '@mui/icons-material';
+import { useThemeColors } from '../theme';
 
 /**
  * Mock document interface
@@ -73,6 +74,7 @@ const mockDocuments: Document[] = [
  */
 const Documents: React.FC = () => {
   const theme = useTheme();
+  const themeColors = useThemeColors();
   const [documents, setDocuments] = useState<Document[]>(mockDocuments);
   const [searchTerm, setSearchTerm] = useState('');
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
@@ -166,7 +168,15 @@ const Documents: React.FC = () => {
           placeholder="Search documents by title, description, or tags..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          sx={{ bgcolor: 'background.paper', borderRadius: 1 }}
+          sx={{
+            bgcolor: 'background.paper',
+            borderRadius: 1,
+            '&:hover': {
+              bgcolor: themeColors.isDarkMode
+                ? `${themeColors.colors.surfaceLight}05` // 5% opacity 
+                : `${themeColors.colors.secondary}02`,   // 2% opacity
+            },
+          }}
         />
       </Box>
 
@@ -246,7 +256,7 @@ const Documents: React.FC = () => {
               sx={{
                 p: 4,
                 textAlign: 'center',
-                bgcolor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.02)',
+                bgcolor: themeColors.isDarkMode ? `${themeColors.colors.surfaceLight}05` : `${themeColors.colors.secondary}02`,
               }}
             >
               <Typography variant="h6" color="text.secondary" gutterBottom>
