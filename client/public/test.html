@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    p {
+      line-height: 1.6;
+    }
+    button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Test Page for Intelligence RAG</h1>
+    <p>If you can see this page, basic HTML rendering is working in your browser.</p>
+    <p>This indicates the issue might be with the React application, not with the web server itself.</p>
+    <button id="testButton">Click Me</button>
+    
+    <div id="result" style="margin-top: 20px;"></div>
+  </div>
+
+  <script>
+    // Simple JavaScript test
+    document.getElementById('testButton').addEventListener('click', function() {
+      document.getElementById('result').innerHTML = 
+        '<p style="color: green;">JavaScript is working properly! The issue is likely with your React application.</p>';
+    });
+  </script>
+</body>
+</html> 

@@ -8,6 +8,7 @@ import Documents from './pages/Documents';
 import Search from './pages/Search';
 import Entities from './pages/Entities';
 import Settings from './pages/Settings';
+import TestComponent from './components/TestComponent';
 
 /**
  * Main App component that sets up routing and theming
@@ -27,6 +28,8 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      {/* Rendering TestComponent at the top level for debugging */}
+      <TestComponent />
       <Layout darkMode={darkMode} toggleDarkMode={toggleDarkMode}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -34,6 +37,8 @@ const App: React.FC = () => {
           <Route path="/search" element={<Search />} />
           <Route path="/entities" element={<Entities />} />
           <Route path="/settings" element={<Settings darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+          {/* Also add a test route */}
+          <Route path="/test" element={<TestComponent />} />
         </Routes>
       </Layout>
     </ThemeProvider>

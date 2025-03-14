@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intelligence RAG - Basic Test</title>
+  <!-- Load React, ReactDOM, and Babel from CDN for a simple test -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #3498db;
+    }
+    p {
+      line-height: 1.6;
+    }
+    .card {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 4px;
+      margin-top: 20px;
+      border-left: 4px solid #3498db;
+    }
+    button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <!-- Root element for React -->
+  <div id="root"></div>
+
+  <!-- Simple React Component -->
+  <script type="text/babel">
+    // Basic test component
+    const App = () => {
+      const [count, setCount] = React.useState(0);
+      
+      return (
+        <div className="container">
+          <h1>Intelligence RAG - Basic Test</h1>
+          <p>This is a standalone HTML file with React loaded from CDN.</p>
+          <p>If you can see this, your browser is correctly rendering HTML and JavaScript.</p>
+          
+          <div className="card">
+            <h2>React Test</h2>
+            <p>Count: {count}</p>
+            <button onClick={() => setCount(count + 1)}>
+              Increment
+            </button>
+            <p>If the counter works, React is working properly in your browser.</p>
+          </div>
+          
+          <div className="card" style={{marginTop: '20px'}}>
+            <h2>Next Steps</h2>
+            <p>
+              If this works but your main application doesn't, the issue is likely with:
+            </p>
+            <ul>
+              <li>React dependencies in your application</li>
+              <li>Webpack configuration</li>
+              <li>TypeScript configuration</li>
+              <li>Material UI setup</li>
+              <li>React Router configuration</li>
+            </ul>
+          </div>
+        </div>
+      );
+    };
+
+    // Render the App
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html> 

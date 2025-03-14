@@ -26,6 +26,12 @@ export const colors = {
   accent3:              'rgba(244, 67, 54, 1)',     // Red
   accent4:              'rgba(156, 39, 176, 1)',    // Purple
   
+  // Status colors
+  success:              'rgba(76, 175, 80, 1)',     // Green
+  error:                'rgba(244, 67, 54, 1)',     // Red
+  warning:              'rgba(255, 152, 0, 1)',     // Orange
+  info:                 'rgba(33, 150, 243, 1)',    // Blue
+  
   // Text colors
   textPrimaryLight:     'rgba(0, 0, 0, 0.87)',
   textSecondaryLight:   'rgba(0, 0, 0, 0.6)',
@@ -104,6 +110,18 @@ const getPalette = (darkMode: boolean): PaletteOptions => ({
     main: colors.secondary,
     light: colors.secondaryLight,
     dark: colors.secondaryDark,
+  },
+  success: {
+    main: colors.success,
+  },
+  error: {
+    main: colors.error,
+  },
+  warning: {
+    main: colors.warning,
+  },
+  info: {
+    main: colors.info,
   },
   background: {
     default: darkMode ? colors.backgroundDark : colors.backgroundLight,
